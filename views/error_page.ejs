@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/975ea15c64.js"></script>
+    </head>
+    <body>
+        <!-- Image and text -->
+        <div class="card">
+            <div class="card-header">
+            <nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand" href="/homepage" >
+                    <i class="fas fa-dog" style="font-size:25px"></i>
+                    Dog Club 
+                </a>
+                <ul class="nav navbar-nav navbar-right">
+                    <a href="/logout" class="btn btn-info btn-sm">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <span class="glyphicon glyphicon-log-out"></span> Logout
+                    </a>
+                </ul>
+            </nav>
+            </div>
+            <% if(user_position =="admin"){%>
+            <div class="text-center">
+            <h2>Ops, there is no result found in this API.</h2>
+            <div class="col-12">
+                <img src= "noresults.png" style="height:400px">
+
+            </div>
+
+
+            <%}else if(user_position == "user"){%>
+             <div class="text-center">
+            <h2>Ops, there is no record found.</h2>
+            <div class="col-12">
+                <img src= "noresults.png" style="height:400px">
+
+
+            <%} %>
+        </div>

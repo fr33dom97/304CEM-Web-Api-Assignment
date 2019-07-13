@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main Page</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/975ea15c64.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+        <script>
+            $(document).on("click","#delete",function(){
+            var id = $(this).data('id');
+            // Detail Modal
+            $("#deletemodal #did").val(id);
+            });
+        </script>
+    
+    </head>
+    <body style="background:lavender;background-size:cover">
+        <!-- Image and text -->
+        <div class="card">
+            <div class="card-header">
+            <nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand" href="/homepage/">
+                    <i class="fas fa-dog" style="font-size:25px"></i>
+                    Dog Club 
+                </a>
+                <ul class="nav navbar-nav navbar-right">
+                    <a href="/logout" class="btn btn-info btn-sm">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <span class="glyphicon glyphicon-log-out"></span> Logout
+                    </a>
+                </ul>
+            </nav>
+            </div>
+        </div>
+            <div class="form-inline">
+                <div class="col-6">   
+                    <div style="width:500px;height:400px;border:1px solid black">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                <img class="d-block w-100" src="<%= pic_url[0]%>"  alt="First slide" width="400px" height="400px" >
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="<%= pic_url[1]%>" alt="Second slide" width="400px" height="400px">
+                                </div>
+                                  <div class="carousel-item">
+                                <img class="d-block w-100" src="<%= pic_url[2]%>" alt="Third slide"width="400px" height="400px">
+                                </div>
+                            </div>
+                           
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                    </div>
+                </div>
+            </div>
+                
+                <div class="col-5">
+                     <b style="font-size:25px">Name:</b> <span style="font-size:22px"><%= dog_detail.message %></span><br><br>
+                    <b style="font-size:25px">Bred_for:</b> <span style="font-size:22px"><%= dog_detail.bred_for %></span><br><br>
+                    <b style="font-size:25px">Life_span:</b> <span style="font-size:22px"><%= dog_detail.life_span%><span><br><br>
+                    <b style="font-size:25px">Temperament: </b> <span style="font-size:22px"><%= dog_detail.temperament%></span>
+                </div>
+                <div class="col-1" style="margin-top:10px">
+                      <% if(user_position=="admin"){%>
+                      <a><i class="fas fa-trash-alt" style="font-size:40px;color:black" data-toggle="modal" data-target="#deletemodal" data-id="<%=dog_detail._id%>" id="delete" name="deletefa" ></i></a>
+                       <!-- Modal -->
+                        <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header" style="background-color:black">
+                                <h5 class="modal-title" id="exampleModalLabel" style="color:white">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                
+                                    Do you want to delete the dog detail?
+                                </div>
+                                <div class="modal-footer">
+                                <form action="/deletedog" method="post">
+                                <input type="hidden" id="did" name="dog_id">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>         
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                      <%} %>
+                </div>
+            </div>
+        </body>
+</html>
