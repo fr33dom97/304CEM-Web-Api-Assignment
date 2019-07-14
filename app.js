@@ -12,10 +12,10 @@ function checksession(req, res, next){
     var sessionPos = req.session.user_position;
     if(!sessionPos){
       res.redirect("/login"); 
-      console.log("session invalid");
+      // console.log("session invalid");
     }
     else{
-        console.log("session valid");
+        // console.log("session valid");
         next();
     }
 
@@ -23,8 +23,9 @@ function checksession(req, res, next){
 app.get("/dog/:dog_detail/",checksession,function(req,res){
     var pass_url2 = require('./connection'); 
     var up = req.session.user_position;
+    console.log(req.params.dog_detail);
     pass_url2.findOne({"message" : req.params.dog_detail}).then((response)=>{
-      // console.log(response.pic_url)
+      console.log(response.pic_url)
       var pic_url = JSON.parse(response.pic_url);
       res.render("dog_details.ejs",{
           user_position : up,
@@ -149,21 +150,23 @@ app.post("/insert_result",function(req,res){
 app.post("/search_result",function(req,res){
   var search = require('./connection');
   var searchR = req.body.search_result;
+  // console.log(searchR);
   search.find({})
     .then(response => {
       var dog_row = 0
       while(dog_row < response.length)
       {
-        if(response[dog_row].message.toLowerCase() == searchR.toLowerCase())
+        // console.log(searchR)
+        var dog_name = response[dog_row].message.toLowerCase();
+        if(dog_name == searchR.toLowerCase())
         {
-          res.redirect("/dog/"+searchR);
+          console.log(dog_name);
+          res.redirect("/dog/"+response[dog_row].message);
         }
-        else
-        {
-          res.redirect("/error_page");
-        }
+      
+        dog_row++;
       }
-       
+      res.redirect("/error_page");
         
     })
     .catch(error => {
